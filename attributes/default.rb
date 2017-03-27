@@ -43,14 +43,8 @@ when 'oracle'
 end
 
 # ::ubuntu configuration
-default['spacewalk']['sync']['user'] = 'admin'
-default['spacewalk']['sync']['password'] = 'admin'
-default['spacewalk']['sync']['channels'] = { 'precise' => 'http://de.archive.ubuntu.com/ubuntu/dists/precise/main/binary-amd64/',
-                                             'precise-updates' => 'http://de.archive.ubuntu.com/ubuntu/dists/precise-updates/main/binary-amd64/',
-                                             'precise-security' => 'http://de.archive.ubuntu.com/ubuntu/dists/precise-security/main/binary-amd64/'
-                                           }
-default['spacewalk']['sync']['cron']['h'] = '7'
-default['spacewalk']['sync']['cron']['m'] = '0'
+default['spacewalk']['errata']['user'] = 'admin'
+default['spacewalk']['errata']['password'] = 'admin'
 default['spacewalk']['errata']['exclude-channels'] = "'precise'" # multiple = "'precise','trusty'"
 default['spacewalk']['errata']['cron']['h'] = '6'
 default['spacewalk']['errata']['cron']['m'] = '0'

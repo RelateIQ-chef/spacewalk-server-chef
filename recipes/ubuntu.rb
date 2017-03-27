@@ -5,22 +5,6 @@ directory '/opt/spacewalk' do
   action :create
 end
 
-# install scripts/crons for repo sync
-cookbook_file '/opt/spacewalk/debianSync.py' do
-  source 'debianSync.py'
-  owner 'root'
-  group 'root'
-  mode '0755'
-end
-
-node['spacewalk']['sync']['channels'].each do |name, url|
-  cron "sw-repo-sync_#{name}" do
-    hour node['spacewalk']['sync']['cron']['h']
-    minute node['spacewalk']['sync']['cron']['m']
-    command "/opt/spacewalk/debianSync.py --username '#{node['spacewalk']['sync']['user']}' --password '#{node['spacewalk']['sync']['password']}' --channel '#{name}' --url '#{url}'"
-  end
-end
-
 # install scripts/crons for errata import
 if node['spacewalk']['server']['errata']
   cookbook_file '/opt/spacewalk/parseUbuntu.py' do
@@ -35,8 +19,8 @@ if node['spacewalk']['server']['errata']
     owner 'root'
     group 'root'
     mode '755'
-    variables(user: node['spacewalk']['sync']['user'],
-              pass: node['spacewalk']['sync']['password'],
+    variables(user: node['spacewalk']['errata']['user'],
+              pass: node['spacewalk']['errata']['password'],
               server: node['spacewalk']['hostname'],
               exclude: node['spacewalk']['errata']['exclude-channels'])
   end
