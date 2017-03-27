@@ -38,16 +38,8 @@ default['spacewalk']['server']['enable_tftp'] = 'Y'
 
 # ::ubuntu configuration
 # login for Spacewalk
-default['spacewalk']['sync']['user'] = 'admin'
-default['spacewalk']['sync']['password'] = 'admin'
-# the channels to be synced. need to manually create them in Spacewalk for the crons to work
-default['spacewalk']['sync']['channels'] = {'precise' => 'http://de.archive.ubuntu.com/ubuntu/dists/precise/main/binary-amd64/',
-                                            'precise-updates' => 'http://de.archive.ubuntu.com/ubuntu/dists/precise-updates/main/binary-amd64/',
-                                            'precise-security' => 'http://de.archive.ubuntu.com/ubuntu/dists/precise-security/main/binary-amd64/'
-                                           }
-# when should repo sync be run. should be AFTER errata import
-default['spacewalk']['sync']['cron']['h'] = '7'
-default['spacewalk']['sync']['cron']['m'] = '0'
+default['spacewalk']['errata']['user'] = 'admin'
+default['spacewalk']['errata']['password'] = 'admin'
 # channels to be excluded from errata, like base which doesnt have updates
 default['spacewalk']['errata']['exclude-channels'] = "'precise'" # multiple = "'precise','trusty'"
 # when should errata be imported. should be AFTER 4:30 GMT+1 because mailinglist gzip gets updaten then

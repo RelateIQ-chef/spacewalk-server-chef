@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of spacewalk-server
 
+## 0.3.0
+* Updated to install Spacewalk 2.6
+* removed debianSync.py script as SW 2.6 supports syncing debian repos now
+* removed patch for python-debian package which has been fixed upstream by now
+
 ## 0.2.6
 * Replaced the Perl debian-repo sync script with a overhauled Python version
 * Minor bugfixes
