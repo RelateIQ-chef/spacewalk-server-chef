@@ -3,6 +3,7 @@
 # Recipe:: default
 #
 # Copyright (C) 2013 Yet Another Clever Name
+#               2014 - 2017 Phil Schuler
 #
 # All rights reserved - Do Not Redistribute
 #
@@ -43,7 +44,7 @@ template "#{Chef::Config[:file_cache_path]}/spacewalk-answers.conf" do
 end
 
 execute 'spacewalk-setup' do
-  command "spacewalk-setup --non-interactive --skip-db-diskspace-check --disconnected --answer-file=#{Chef::Config[:file_cache_path]}/spacewalk-answers.conf"
+  command "spacewalk-setup --non-interactive --skip-db-diskspace-check --answer-file=#{Chef::Config[:file_cache_path]}/spacewalk-answers.conf"
   action :run
   creates '/var/log/rhn/rhn_installation.log'
   only_if { node['spacewalk_installed'].nil? }
