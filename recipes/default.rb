@@ -12,20 +12,25 @@
 include_recipe 'yum-epel' if platform_family?('rhel')
 include_recipe 'yum-fedora' if platform_family?('fedora')
 
-remote_file '/etc/yum.repos.d/group_spacewalkproject-java-packages-epel-7.repo' do
-  source 'https://copr.fedorainfracloud.org/coprs/g/spacewalkproject/java-packages/repo/epel-7/group_spacewalkproject-java-packages-epel-7.repo'
-  owner 'root'
-  group 'root'
-  mode '0644'
-  action :create
-end
+case node['platform_family']
+when 'rhel'
+  remote_file '/etc/yum.repos.d/group_spacewalkproject-java-packages-epel-7.repo' do
+    source 'https://copr.fedorainfracloud.org/coprs/g/spacewalkproject/java-packages/repo/epel-7/group_spacewalkproject-java-packages-epel-7.repo'
+    owner 'root'
+    group 'root'
+    mode '0644'
+    action :create
+  end
 
-remote_file '/etc/yum.repos.d/group_spacewalkproject-epel6-addons-epel-6.repo' do
-  source 'https://copr.fedorainfracloud.org/coprs/g/spacewalkproject/epel6-addons/repo/epel-6/group_spacewalkproject-epel6-addons-epel-6.repo'
-  owner 'root'
-  group 'root'
-  mode '0644'
-  action :create
+  if node['platform_version'][0] == '6'
+    remote_file '/etc/yum.repos.d/group_spacewalkproject-epel6-addons-epel-6.repo' do
+      source 'https://copr.fedorainfracloud.org/coprs/g/spacewalkproject/epel6-addons/repo/epel-6/group_spacewalkproject-epel6-addons-epel-6.repo'
+      owner 'root'
+      group 'root'
+      mode '0644'
+      action :create
+    end
+  end
 end
 
 remote_file "#{Chef::Config[:file_cache_path]}/spacewalk-repo.rpm" do
