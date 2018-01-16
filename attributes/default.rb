@@ -5,6 +5,7 @@ default['spacewalk']['hostname'] = node['hostname']
 
 # Answer file configuration
 default['spacewalk']['server']['admin_email'] = 'root@localhost'
+default['spacewalk']['server']['ssl']['cnames'] = 'spacewalk2'
 default['spacewalk']['server']['ssl']['org'] = 'Spacewalk Org'
 default['spacewalk']['server']['ssl']['org_unit'] = 'spacewalk'
 default['spacewalk']['server']['ssl']['city'] = 'My City'
@@ -20,9 +21,9 @@ arch = node['kernel']['machine'] == 'x86_64' ? 'x86_64' : 'i386'
 case node['platform_family']
 when 'rhel'
   platform_major = node['platform_version'][0]
-  default['spacewalk']['server']['repo_url'] = "http://spacewalk.redhat.com/yum/2.6/RHEL/#{platform_major}/#{arch}/spacewalk-repo-2.6-0.el#{platform_major}.noarch.rpm"
+  default['spacewalk']['server']['repo_url'] = "http://yum.spacewalkproject.org/2.7/RHEL/#{platform_major}/#{arch}/spacewalk-repo-2.7-2.el#{platform_major}.noarch.rpm"
 when 'fedora'
-  default['spacewalk']['server']['repo_url'] = "http://spacewalk.redhat.com/yum/2.6/Fedora/#{node['platform_version']}/#{arch}/spacewalk-repo-2.6-0.fc#{node['platform_version']}.noarch.rpm"
+  default['spacewalk']['server']['repo_url'] = "http://yum.spacewalkproject.org/2.7/Fedora/#{node['platform_version']}/#{arch}/spacewalk-repo-2.7-2.fc#{node['platform_version']}.noarch.rpm"
 end
 
 case node['spacewalk']['server']['db']['type']
