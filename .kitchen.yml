@@ -14,11 +14,27 @@ platforms:
   driver_config:
     image: centos:6.9
     platform: centos
+- name: centos-7
+  driver_config:
+    run_command: /usr/sbin/init
+    volume:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+    provision_command: systemctl enable sshd.service  
 
 suites:
-- name: default
+- name: centos7
+  excludes:
+    - centos-6.9
   run_list:
     - recipe[spacewalk-server]
     - recipe[spacewalk-server::iptables]
     - recipe[spacewalk-server::ubuntu]
   attributes: {}
+- name: centos6
+  excludes:
+    - centos-7
+  run_list:
+    - recipe[spacewalk-server]
+    - recipe[spacewalk-server::iptables]
+    - recipe[spacewalk-server::ubuntu]
+  attributes: {}  
