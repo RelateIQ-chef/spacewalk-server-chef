@@ -1,0 +1,6 @@
+false_positive: []
+mock_secret:
+- id: spacewalk-server-chef://dummy-validation.pem_122c46795a3adafa83d4e8cc6019ea044e094736
+  justification: 'Mock key or false positive identified in the latest security scan, see tracking GRC 00676414'
+non_production_secret: []
+production_secret: []
